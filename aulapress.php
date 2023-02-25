@@ -22,7 +22,7 @@ function registration_form($username,$password,$email,$website,$first_name,$last
         
     }
     input[type=submit] {
-        width: 25%;
+        width: auto;
         display: block;
         margin: 0 auto;
         padding: 6px 10px;
