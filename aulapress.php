@@ -8,7 +8,7 @@ Author: Marco Floriano
 Author URI: https://marcofloriano.com.br
 */
 // HTML code of the registration form
-function registration_form($username,$password,$email,$website,$first_name,$last_name,$nickname,$bio) {
+function registration_form() {
     echo '
     <style>
     div {
@@ -194,7 +194,7 @@ function complete_registration() {
 		);
         $user = wp_insert_user($userdata);
         echo '<div>';
-        echo 'Registro efetuado com sucesso! Acesse a <a href="' . get_site_url() . '/wp-login.php">página de login</a>.';
+        echo 'Registro efetuado com sucesso! Acesse a <a href="' . get_site_url() . '/login">página de login</a>.';
         echo '<div>';
 	}
 }
@@ -264,16 +264,7 @@ function custom_registration_function() {
             $bio
 		);
     }
-    registration_form(
-    	$username,
-        $password,
-        $email,
-        $website,
-        $first_name,
-        $last_name,
-        $nickname,
-        $bio
-	);
+    registration_form();
 }
 
 // Function that puts all the login functions we've created above into use
@@ -315,7 +306,14 @@ function custom_registration_shortcode() {
 add_shortcode( 'aulapress_custom_login', 'custom_login_shortcode' );
 // The callback function that will replace [book]
 function custom_login_shortcode() {
-    // ob_start();
+    ob_start();
     custom_login_function();
-    // return ob_get_clean();
+    return ob_get_clean();
 }
+
+//This action hook executes just before WordPress determines which template page to load. It is a good hook to use if you need to do a redirect with full knowledge of the content that has been queried.
+// Alguns temas apresentaram warnings sobre headers enviados após o carregamento da página de login
+// Warning: cannot modify header information
+add_action('template_redirect', function () {
+    ob_start();
+});
