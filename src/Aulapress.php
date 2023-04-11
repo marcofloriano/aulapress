@@ -1,0 +1,2 @@
+<?php
+// Primary plugin class

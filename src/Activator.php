@@ -1,0 +1,2 @@
+<?php
+// Activation class
