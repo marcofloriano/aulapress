@@ -11,7 +11,19 @@
 
 namespace AULAPRESS;
 
-register_activation_hook(__FILE__, function() {
-    require_once plugin_dir_path(__FILE__) . 'src/Activation.php';
+/**
+ * Register the activation hook and calls it's activation method
+ * 
+ */
+register_activation_hook( __FILE__, function() {
+    require_once plugin_dir_path( __FILE__ ) . 'src/Activation.php';
     Activation::activate();
+});
+
+/**
+ * Register the deactivation hook and calls it's deactivation method
+ */
+register_deactivation_hook( __FILE__, function(){
+    require_once plugin_dir_path( __FILE__ ) . 'src/Deactivation.php';
+    Deactivation::deactivate();
 });

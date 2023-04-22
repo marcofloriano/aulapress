@@ -13,3 +13,6 @@
 
 // Print URL of current file/folder
 // echo plugin_dir_url(__FILE__);
+
+// WordPress Coding Standards
+// https://developer.wordpress.org/coding-standards/wordpress-coding-standards/
