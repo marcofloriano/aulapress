@@ -8,7 +8,7 @@ namespace AULAPRESS;
 
 /**
  * When the plugin is activate, it's supposed to execute these methods
- * in order to complete needeed taks to correct function of the plugin
+ * in order to complete needeed taks to the correct functioning of the plugin
  * 
  */
 class Activation {
@@ -17,12 +17,31 @@ class Activation {
 	 * 
 	 * @return void
 	 */
-	public static function activate() {
+	public static function aulapress_activate() {
+		// Create a new role for the students
+		$student_role         = 'aulapress_student';
+		$student_display_name = 'Aulapress Student';
+		$student_capabilities = array( 
+			'read'         => true
+		);
+		add_role( $student_role, $student_display_name, $student_capabilities );
+		// Create a new role for the teachers
+		$teacher_role         = 'aulapress_teacher';
+		$teacher_display_name = 'Aulapress Teacher';
+		$teacher_capabilities = array( 
+			'delete_posts'           => true, 
+			'delete_published_posts' => true, 
+			'edit_posts'             => true, 
+			'edit_published_posts'   => true, 
+			'publish_posts'          => true, 
+			'read'                   => true, 
+			'upload_files'           => true
+		);
+		add_role( $teacher_role, $teacher_display_name, $teacher_capabilities );
 		// Gets the administrator role object and adds a custom capability to it
-		$role = get_role('administrator');
-
-		if(!empty($role)) { //
-			$role->add_cap('aulapress_instructor');
+		$administrador_role = get_role( 'administrator' );
+		if( ! empty( $administrador_role ) ) {
+			$administrador_role->add_cap( 'aulapress_teacher' );
 		}
 	}
 }

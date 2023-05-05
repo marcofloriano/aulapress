@@ -17,7 +17,7 @@ namespace AULAPRESS;
  */
 register_activation_hook( __FILE__, function() {
     require_once plugin_dir_path( __FILE__ ) . 'src/Activation.php';
-    Activation::activate();
+    Activation::aulapress_activate();
 });
 
 /**
@@ -25,5 +25,5 @@ register_activation_hook( __FILE__, function() {
  */
 register_deactivation_hook( __FILE__, function(){
     require_once plugin_dir_path( __FILE__ ) . 'src/Deactivation.php';
-    Deactivation::deactivate();
+    Deactivation::aulapress_deactivate();
 });

@@ -11,5 +11,5 @@ if(! defined('WP_UNINSTALL_PLUGIN')) {
 // Removes the Aulapress Instructor custom capability from the Administrator role
 $role = get_role('administrator');
 if(!empty($role)) {
-	$role->remove_cap('aulapress_instructor');
+	$role->remove_cap('aulapress_teacher');
 }

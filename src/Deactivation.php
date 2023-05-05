@@ -3,7 +3,7 @@
 namespace AULAPRESS;
 
 class Deactivation {
-	public static function deactivate() {
+	public static function aulapress_deactivate() {
 
 	}
 }
