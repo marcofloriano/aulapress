@@ -22,19 +22,19 @@ class Activation {
 		$student_role         = 'aulapress_student';
 		$student_display_name = 'Aulapress Student';
 		$student_capabilities = array( 
-			'read'         => true
+			'read'         => true,
+			'read_courses' => true
 		);
 		add_role( $student_role, $student_display_name, $student_capabilities );
 		// Create a new role for the teachers
 		$teacher_role         = 'aulapress_teacher';
 		$teacher_display_name = 'Aulapress Teacher';
 		$teacher_capabilities = array( 
-			'delete_posts'           => true, 
-			'delete_published_posts' => true, 
-			'edit_posts'             => true, 
-			'edit_published_posts'   => true, 
-			'publish_posts'          => true, 
+			'delete_courses'         => true, 
+			'edit_courses'           => true, 
+			'publish_courses'        => true, 
 			'read'                   => true, 
+			'read_courses'           => true, 
 			'upload_files'           => true
 		);
 		add_role( $teacher_role, $teacher_display_name, $teacher_capabilities );
