@@ -11,6 +11,9 @@
 
 namespace AULAPRESS;
 
+// Load the Aulapress main class file from subfolder
+include plugin_dir_path(__FILE__) . 'src/Aulapress.php';
+
 /**
  * Register the activation hook and calls it's activation method
  * 

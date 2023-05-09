@@ -16,3 +16,12 @@
 
 // WordPress Coding Standards
 // https://developer.wordpress.org/coding-standards/wordpress-coding-standards/
+
+add_action( 'admin_menu', 'aulapress_create_menu' );
+
+function aulapress_create_menu() {
+	// create wordpress dashboard top-level menu
+	add_menu_page( 'Aulapress Settings Page', 'Aulapress',
+		'manage_options', 'aulapress-options', 'aulapress_settings_page',
+		'dashicons-welcome-learn-more', 30 );
+}
