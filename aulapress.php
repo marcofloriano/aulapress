@@ -11,7 +11,10 @@
 
 namespace AULAPRESS;
 
-// Load the Aulapress main class file from subfolder
+/**
+ * Load the Aulapress main file from source subfolder
+ * 
+ */
 include plugin_dir_path(__FILE__) . 'src/Aulapress.php';
 
 /**

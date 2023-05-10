@@ -17,11 +17,23 @@
 // WordPress Coding Standards
 // https://developer.wordpress.org/coding-standards/wordpress-coding-standards/
 
+//Aulapress Main Menu
 add_action( 'admin_menu', 'aulapress_create_menu' );
 
 function aulapress_create_menu() {
-	// create wordpress dashboard top-level menu
-	add_menu_page( 'Aulapress Settings Page', 'Aulapress',
+
+	//creates aulapress custom top-level menu
+	add_menu_page( 'Aulapress Options', 'Aulapress',
 		'manage_options', 'aulapress-options', 'aulapress_settings_page',
 		'dashicons-welcome-learn-more', 30 );
+
+	//creates aulapress submenu items
+	add_submenu_page( 'aulapress-options', 'Aulapress Settings', 'Settings',
+		'manage_options', 'aulapress-options', 'aulapress_settings_page' );
+	add_submenu_page( 'aulapress-options', 'About Aulapress', 'About',
+		'manage_options', 'aulapress-about', 'aulapress_about_page' );
+	add_submenu_page( 'aulapress-options', 'Help And Support', 'Help',
+		'manage_options', 'aulapress-help', 'aulapress_help_page' );	
+	add_submenu_page( 'aulapress-options', 'Uninstall Aulapress', 'Uninstall',
+		'manage_options', 'aulapress-uninstall', 'aulapress_uninstall_page' );
 }
