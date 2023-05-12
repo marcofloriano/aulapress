@@ -15,5 +15,6 @@ class Deactivation {
 	 * @return void
 	 */	 
 	public static function aulapress_deactivate() {
+
 	}
 }
