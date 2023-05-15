@@ -1,7 +1,7 @@
 <?php
 /**
- * Isolates your uninstal code from the rest of your plugin
- * and doesn't allow arbitrary code to run from your other plugin files
+ * Isolates uninstall code from the rest of the plugin
+ * and doesn't allow arbitrary code to run from other plugin files
  *
  */
 
@@ -18,5 +18,6 @@ if(! defined( 'WP_UNINSTALL_PLUGIN' )) {
 remove_role( 'aulapress_teacher' );
 remove_role( 'aulapress_student' );
 
-//returns false if the option to delete cannot be found
+// Returns false if the option to delete cannot be found
 delete_option( 'aulapress_plugin_options' );
+delete_option( 'aulapress_plugin_admin_options' );

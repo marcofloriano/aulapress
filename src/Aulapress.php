@@ -38,28 +38,11 @@ function aulapress_create_menu() {
 		'manage_options', 'aulapress-uninstall', 'aulapress_uninstall_page' );
 }
 
-//Aulapress Settings Page
-//Options array to store on wordpress database options table
-$aulapress_options = array(
-	'color'    => 'red',
-	'fontsize' => '120%',
-	'border'   => '2px solid red'
-);
-//creates new and does nothing if the option name already exists
-add_option( 'aulapress_plugin_options',  $aulapress_options );
-
-$aulapress_new_options = array(
-	'color'    => 'green',
-	'fontsize' => '100%',
-	'border'   => '1px solid black'
-);
-//checks if the option already exists before updating its value and creates it if needed
-update_option( 'aulapress_plugin_options', $aulapress_new_options );
-
-//fetch our array of options
+// Aulapress Settings Page
+// Fetch our array of frontend options
 $aulapress_options = get_option( 'aulapress_plugin_options' );
 
-//store individual option values in variables
-$color = $aulapress_options[ 'color' ];
-$fontsize = $aulapress_options[ 'fontsize' ];
-$border = $aulapress_options[ 'border' ];
+// Store individual option values in variables
+$color = $aulapress_options['color'];
+$fontsize = $aulapress_options['fontsize'];
+$border = $aulapress_options['border'];
