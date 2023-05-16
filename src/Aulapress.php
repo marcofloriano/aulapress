@@ -39,10 +39,14 @@ function aulapress_create_menu() {
 }
 
 // Aulapress Settings Page
-// Fetch our array of frontend options
-$aulapress_options = get_option( 'aulapress_plugin_options' );
+function aulapress_settings_page() {
+	// Fetch our array of frontend options
+	$aulapress_options = get_option( 'aulapress_plugin_options' );
 
-// Store individual option values in variables
-$color = $aulapress_options['color'];
-$fontsize = $aulapress_options['fontsize'];
-$border = $aulapress_options['border'];
+	// Store individual option values in variables
+	$color    = $aulapress_options[ 'color' ];
+	$fontsize = $aulapress_options[ 'fontsize' ];
+	$border   = $aulapress_options[ 'border' ];
+
+	var_dump($aulapress_options);	
+}

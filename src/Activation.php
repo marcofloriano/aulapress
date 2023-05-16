@@ -17,6 +17,13 @@ class Activation {
 	 */
 	public static function aulapress_activate() {
 		
+		// Creates aulapress plugin roles
+		self::aulapress_create_roles();
+		// Creates aulapress plugin options
+		self::aulapress_create_options();
+	}
+
+	public static function aulapress_create_roles() {
 		// Create a new role for the students
 		$student_role         = 'aulapress_student';
 		$student_display_name = 'Aulapress Student';
@@ -32,9 +39,6 @@ class Activation {
 			'upload_files' => true
 		);
 		add_role( $teacher_role, $teacher_display_name, $teacher_capabilities );
-
-		// Creates aulapress plugin options
-		self::aulapress_create_options();
 	}
 
 	public static function aulapress_create_options() {
@@ -49,8 +53,8 @@ class Activation {
 
 		// back-end options: loaded only if explicitly needed
 		add_option( 'aulapress_plugin_admin_options', array(
-			'version' => '1.0',
-			'donate_url' => 'https://marcofloriano.com.br',
+			'version'          => '1.0',
+			'donate_url'       => 'https://marcofloriano.com.br',
 			'advanced_options' => '1'
 			),
 		'', 'no'
