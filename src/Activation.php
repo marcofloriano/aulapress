@@ -5,13 +5,13 @@
  */
 namespace AULAPRESS;
 /**
- * When the plugin is activate, it's supposed to execute these methods
+ * When the plugin is activated, it's supposed to execute these methods
  * in order to complete needeed taks to the correct functioning of the plugin
  * 
  */
 class Activation {
 	/**
-	 *	Perform the neededd taks to the good function of the plugin
+	 *	Perform the needed taks to the good function of the plugin
 	 * 
 	 * @return void
 	 */
@@ -23,7 +23,13 @@ class Activation {
 		self::aulapress_create_options();
 	}
 
+	/**
+	 *	Creates teacher and student roles
+	 *
+	 * @return void
+	 */
 	public static function aulapress_create_roles() {
+		
 		// Create a new role for the students
 		$student_role         = 'aulapress_student';
 		$student_display_name = 'Aulapress Student';
@@ -31,6 +37,7 @@ class Activation {
 			'read' => true
 		);
 		add_role( 'aulapress_student', 'Aulapress Student', $student_capabilities );
+		
 		// Create a new role for the teachers
 		$teacher_role         = 'aulapress_teacher';
 		$teacher_display_name = 'Aulapress Teacher';
@@ -41,6 +48,12 @@ class Activation {
 		add_role( $teacher_role, $teacher_display_name, $teacher_capabilities );
 	}
 
+	/**
+	 *	Creates options for the front-end (user options) 
+	 *	and back-end (system options) of the plugin
+	 *
+	 * @return void
+	 */
 	public static function aulapress_create_options() {
 
 		// front-end options: autoloaded

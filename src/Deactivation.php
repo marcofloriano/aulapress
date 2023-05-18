@@ -15,13 +15,6 @@ class Deactivation {
 	 * @return void
 	 */	 
 	public static function aulapress_deactivate() {
-
-		// Removes the roles created by the plugin upon activation
-		remove_role( 'aulapress_teacher' );
-		remove_role( 'aulapress_student' );
-
-		//returns false if the option to delete cannot be found
-		delete_option( 'aulapress_plugin_options' );
-		delete_option( 'aulapress_plugin_admin_options' );
+		
 	}
 }

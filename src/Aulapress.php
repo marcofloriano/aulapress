@@ -32,21 +32,72 @@ function aulapress_create_menu() {
 		'manage_options', 'aulapress-options', 'aulapress_settings_page' );
 	add_submenu_page( 'aulapress-options', 'About Aulapress', 'About',
 		'manage_options', 'aulapress-about', 'aulapress_about_page' );
-	add_submenu_page( 'aulapress-options', 'Help And Support', 'Help',
-		'manage_options', 'aulapress-help', 'aulapress_help_page' );	
-	add_submenu_page( 'aulapress-options', 'Uninstall Aulapress', 'Uninstall',
-		'manage_options', 'aulapress-uninstall', 'aulapress_uninstall_page' );
 }
 
 // Aulapress Settings Page
 function aulapress_settings_page() {
 	// Fetch our array of frontend options
-	$aulapress_options = get_option( 'aulapress_plugin_options' );
+	// $aulapress_options = get_option( 'aulapress_plugin_options' );
 
 	// Store individual option values in variables
-	$color    = $aulapress_options[ 'color' ];
-	$fontsize = $aulapress_options[ 'fontsize' ];
-	$border   = $aulapress_options[ 'border' ];
+	// $color    = $aulapress_options[ 'color' ];
+	// $fontsize = $aulapress_options[ 'fontsize' ];
+	// $border   = $aulapress_options[ 'border' ];
 
-	var_dump($aulapress_options);	
+?>
+	<div class="wrap">
+		<h2>My Plugin</h2>
+		<form action="options.php" method="post">			
+		</form>
+	</div>
+<?php
+	// Register plugin settings
+	$args = array(
+		'type'              => 'string',
+		'sanitize_callback' => 'aulapress_validate_options',
+		'default'           => NULL
+	);
+	register_setting( 'aulapress_plugin_options', 'aulapress_plugin_options', $args );
+
+	add_settings_section(
+		'aulapress_plugin_main',
+		'Aulapress Plugin Settings',
+		'aulapress_plugin_section_text',
+		'aulapress_plugin'
+	);
+
+	add_settings_field(
+		'aulapress_plugin_name',
+		'Your Name',
+		'aulapress_plugin_setting_name',
+		'aulapress_plugin',
+		'aulapress_plugin_main'
+	);
+}
+
+// Draw the section header
+function aulapress_plugin_section_text() {
+	echo '<p>Enter your settings here</p>';
+}
+
+// Display and fill the Name form field
+function aulapress_plugin_setting_name() {
+
+	// get option 'text_string' value from the database
+	$options = get_option( 'aulapress_plugin_options' );
+	$name = $options['name'];
+
+	// echo the field
+	?>
+	<input id="name" type="text" name="aulapress_plugin_options[name]" value="<?php esc_attr( $name ); ?>" >
+<?php
+}
+
+// Aulapress About Page
+function aulapress_about_page() {
+?>
+	<div class="wrap">
+		<h2>About Aulapress</h2>
+	</div>
+<?php
 }
