@@ -58,6 +58,7 @@ class Activation {
 
 		// front-end options: autoloaded
 		add_option( 'aulapress_plugin_options', array(
+			'name'     => '',
 			'color'    => 'green',
 			'fontsize' => '100%',
 			'border'   => '1px solid black'

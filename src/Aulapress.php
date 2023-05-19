@@ -44,53 +44,75 @@ function aulapress_settings_page() {
 	// $fontsize = $aulapress_options[ 'fontsize' ];
 	// $border   = $aulapress_options[ 'border' ];
 
-?>
+	?>
 	<div class="wrap">
 		<h2>My Plugin</h2>
-		<form action="options.php" method="post">			
+		<form action="options.php" method="post">
+		<?php
+		// References the whitelisted option you have declared with register_setting()
+		settings_fields( 'aulapress_plugin_options' );
+		// Outputs all the sections and form fields previously defined
+		do_settings_sections( 'aulapress_plugin' );
+		// Display the form submit butoon
+		submit_button( 'Save Changes', 'primary' );
+		?>		
 		</form>
 	</div>
-<?php
-	// Register plugin settings
+	<?php
+}
+
+// Register plugin settings
+add_action( 'admin_init', 'aulapress_admin_init' );
+
+function aulapress_admin_init() {
 	$args = array(
 		'type'              => 'string',
 		'sanitize_callback' => 'aulapress_validate_options',
 		'default'           => NULL
 	);
+	// Register our settings
 	register_setting( 'aulapress_plugin_options', 'aulapress_plugin_options', $args );
 
+	// Add a settings section
 	add_settings_section(
-		'aulapress_plugin_main',
-		'Aulapress Plugin Settings',
-		'aulapress_plugin_section_text',
+		'aulapress_main',
+		'Aulapress Settings',
+		'aulapress_section_text',
 		'aulapress_plugin'
 	);
 
+	// Create our setting field for name
 	add_settings_field(
 		'aulapress_plugin_name',
 		'Your Name',
-		'aulapress_plugin_setting_name',
+		'aulapress_setting_name',
 		'aulapress_plugin',
-		'aulapress_plugin_main'
+		'aulapress_main'
 	);
 }
 
 // Draw the section header
-function aulapress_plugin_section_text() {
+function aulapress_section_text() {
 	echo '<p>Enter your settings here</p>';
 }
 
 // Display and fill the Name form field
-function aulapress_plugin_setting_name() {
+function aulapress_setting_name() {
 
 	// get option 'text_string' value from the database
 	$options = get_option( 'aulapress_plugin_options' );
 	$name = $options['name'];
-
 	// echo the field
-	?>
-	<input id="name" type="text" name="aulapress_plugin_options[name]" value="<?php esc_attr( $name ); ?>" >
-<?php
+	echo "<input id='name' name='aulapress_plugin_options[name]' type='text' value='" . esc_attr( $name ) . "' />";
+}
+
+// Validate user input
+function aulapress_validate_options( $input ) {
+
+	$valid = array();
+	// text and spaces only for the name
+	$valid['name'] = preg_replace( '/[^a-zA-Z\s]/', '', $input['name'] );
+	return $valid;
 }
 
 // Aulapress About Page
