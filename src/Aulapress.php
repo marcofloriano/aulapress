@@ -46,7 +46,7 @@ function aulapress_settings_page() {
 
 	?>
 	<div class="wrap">
-		<h2>My Plugin</h2>
+		<h2>Settings</h2>
 		<form action="options.php" method="post">
 		<?php
 		// References the whitelisted option you have declared with register_setting()
@@ -76,7 +76,7 @@ function aulapress_admin_init() {
 	// Add a settings section
 	add_settings_section(
 		'aulapress_main',
-		'Aulapress Settings',
+		'Aulapress Options and Configuration',
 		'aulapress_section_text',
 		'aulapress_plugin'
 	);
@@ -93,7 +93,7 @@ function aulapress_admin_init() {
 
 // Draw the section header
 function aulapress_section_text() {
-	echo '<p>Enter your settings here</p>';
+	echo '<p>Select the desired options to render aulapress courses pages</p>';
 }
 
 // Display and fill the Name form field
@@ -111,7 +111,22 @@ function aulapress_validate_options( $input ) {
 
 	$valid = array();
 	// text and spaces only for the name
-	$valid['name'] = preg_replace( '/[^a-zA-Z\s]/', '', $input['name'] );
+	$valid['name'] = preg_replace( 
+		'/[^a-zA-Z\s]/', 
+		'', 
+		$input['name'] 
+	);
+
+	if( $valid['name'] !== $input['name'] ) {
+
+		add_settings_error(
+			'aulapress_plugin_text_string',
+			'aulapress_plugin_texterror',
+			'Incorrect value entered! Please only input letters and spaces.',
+			'error'
+		);
+	}
+
 	return $valid;
 }
 
@@ -119,7 +134,7 @@ function aulapress_validate_options( $input ) {
 function aulapress_about_page() {
 ?>
 	<div class="wrap">
-		<h2>About Aulapress</h2>
+		<h2>About</h2>
 	</div>
 <?php
 }
