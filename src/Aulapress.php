@@ -47,6 +47,7 @@ function aulapress_settings_page() {
 	?>
 	<div class="wrap">
 		<h2>Settings</h2>
+		<?php settings_errors(); ?>
 		<form action="options.php" method="post">
 		<?php
 		// References the whitelisted option you have declared with register_setting()
@@ -70,6 +71,7 @@ function aulapress_admin_init() {
 		'sanitize_callback' => 'aulapress_validate_options',
 		'default'           => NULL
 	);
+
 	// Register our settings
 	register_setting( 'aulapress_plugin_options', 'aulapress_plugin_options', $args );
 
@@ -86,6 +88,24 @@ function aulapress_admin_init() {
 		'aulapress_plugin_name',
 		'Your Name',
 		'aulapress_setting_name',
+		'aulapress_plugin',
+		'aulapress_main'
+	);
+
+	// Create our settings field for favorite holiday
+	add_settings_field(
+		'aulapress_plugin_fav_holiday',
+		'Favorite Holiday',
+		'aulapress_setting_fav_holiday',
+		'aulapress_plugin',
+		'aulapress_main'
+	);
+
+	// Create our setting field for beast mode
+	add_settings_field(
+		'aulapress_plugin_beast_mode',
+		'Enable Beast Mode?',
+		'aulapress_setting_beast_mode',
 		'aulapress_plugin',
 		'aulapress_main'
 	);
@@ -106,6 +126,32 @@ function aulapress_setting_name() {
 	echo "<input id='name' name='aulapress_plugin_options[name]' type='text' value='" . esc_attr( $name ) . "' />";
 }
 
+// Display and select the favorite holiday select field
+function aulapress_setting_fav_holiday() {
+
+	// Get option 'fav holiday' value from the database
+	// Set to Christmas as default if the option does not exist
+	$options = get_option( 'aulapress_plugin_options', [ 'fav_holiday' => 'Christmas' ] );
+	$fav_holiday = $options['fav_holiday'];
+
+	// Define the select option values for favorite holiday
+	$items = array( 'Christmas', 'Easter', 'Pentecost' );
+
+	echo "<select id='fav_holiday' name='aulapress_plugin_options[fav_holiday]' >";
+
+	foreach ( $items as $item ) {
+		// Loop through the option values
+		// If saved option matches the option value, select it
+		echo "<option value='" . $item . "' "
+		. selected( $fav_holiday, $item, false ) . ">" . esc_html( $item )
+		. "</option>";
+	}
+}
+
+function aulapress_setting_beast_mode() {
+	
+}
+
 // Validate user input
 function aulapress_validate_options( $input ) {
 
@@ -120,7 +166,7 @@ function aulapress_validate_options( $input ) {
 	if( $valid['name'] !== $input['name'] ) {
 
 		add_settings_error(
-			'aulapress_plugin_text_string',
+			'aulapress_plugin_text_string', // undefined, probably wrong
 			'aulapress_plugin_texterror',
 			'Incorrect value entered! Please only input letters and spaces.',
 			'error'
