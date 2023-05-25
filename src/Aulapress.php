@@ -126,7 +126,7 @@ function aulapress_setting_name() {
 	echo "<input id='name' name='aulapress_plugin_options[name]' type='text' value='" . esc_attr( $name ) . "' />";
 }
 
-// Display and select the favorite holiday select field
+// Display and select field
 function aulapress_setting_fav_holiday() {
 
 	// Get option 'fav holiday' value from the database
@@ -143,20 +143,39 @@ function aulapress_setting_fav_holiday() {
 		// Loop through the option values
 		// If saved option matches the option value, select it
 		echo "<option value='" . $item . "' "
+		// WordPress core function which compares two values and, if they match return selected="selected"
 		. selected( $fav_holiday, $item, false ) . ">" . esc_html( $item )
 		. "</option>";
 	}
+
+	echo "</selected>";
 }
 
+// Display and set radio button fields
 function aulapress_setting_beast_mode() {
-	
+
+	// Get option 'beast_mode' value from the database
+	// Set to 'disabled' as a default if the option does not exist
+	$options = get_option( 'aulapress_plugin_options', [ 'beast_mode' => 'disabled' ] );
+	$beast_mode = $options['beast_mode'];
+
+	// Define the radio button options
+	$items = array( 'Enabled', 'Disabled' );
+
+	foreach ($items as $item) {
+		
+		// Loop through the two radio button options and select if set in the option value
+		// checked() is an WordPress core function to compare the saved value against the display value and, if same, output checked="checked"
+		echo "<label><input " . checked( $beast_mode , $item, false ) . "
+		value= '" . esc_attr( $item )  . "' name='aulapress_plugin_options[beast_mode]'
+		type='radio'/>" . esc_html( $item ) . "</label><br/>";
+	}
 }
 
 // Validate user input
 function aulapress_validate_options( $input ) {
 
-	$valid = array();
-	// text and spaces only for the name
+	// letters and spaces only for the name
 	$valid['name'] = preg_replace( 
 		'/[^a-zA-Z\s]/', 
 		'', 
@@ -173,6 +192,9 @@ function aulapress_validate_options( $input ) {
 		);
 	}
 
+	// Sanitize the data we are receiving
+	$valid['fav_holiday'] = sanitize_text_field( $input['fav_holiday'] );
+	$valid['beast_mode'] = sanitize_text_field( $input['beast_mode'] );
 	return $valid;
 }
 

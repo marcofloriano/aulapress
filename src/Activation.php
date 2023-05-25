@@ -49,7 +49,7 @@ class Activation {
 	}
 
 	/**
-	 *	Creates options for the front-end (user options) 
+	 *	Creates options for the front-end (public options) 
 	 *	and back-end (system options) of the plugin
 	 *
 	 * @return void
@@ -57,8 +57,7 @@ class Activation {
 	public static function aulapress_create_options() {
 
 		// front-end options: autoloaded
-		add_option( 'aulapress_plugin_options', array(
-			'name'     => '',
+		add_option( 'aulapress_plugin_public_options', array(
 			'color'    => 'green',
 			'fontsize' => '100%',
 			'border'   => '1px solid black'
