@@ -120,7 +120,7 @@ function aulapress_section_text() {
 function aulapress_setting_name() {
 
 	// get option 'text_string' value from the database
-	$options = get_option( 'aulapress_plugin_options' );
+	$options = get_option( 'aulapress_plugin_options', [ 'name' => '' ] );
 	$name = $options['name'];
 	// echo the field
 	echo "<input id='name' name='aulapress_plugin_options[name]' type='text' value='" . esc_attr( $name ) . "' />";
@@ -156,7 +156,7 @@ function aulapress_setting_beast_mode() {
 
 	// Get option 'beast_mode' value from the database
 	// Set to 'disabled' as a default if the option does not exist
-	$options = get_option( 'aulapress_plugin_options', [ 'beast_mode' => 'disabled' ] );
+	$options = get_option( 'aulapress_plugin_options', [ 'beast_mode' => 'Disabled' ] );
 	$beast_mode = $options['beast_mode'];
 
 	// Define the radio button options
