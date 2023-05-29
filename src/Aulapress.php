@@ -46,7 +46,7 @@ function aulapress_settings_page() {
 
 	?>
 	<div class="wrap">
-		<h2>Settings</h2>
+		<h2><span class="dashicons dashicons-admin-generic"></span> Settings</h2>
 		<?php settings_errors(); ?>
 		<form action="options.php" method="post">
 		<?php
@@ -54,9 +54,12 @@ function aulapress_settings_page() {
 		settings_fields( 'aulapress_plugin_options' );
 		// Outputs all the sections and form fields previously defined
 		do_settings_sections( 'aulapress_plugin' );
-		// Display the form submit butoon
-		submit_button( 'Save Changes', 'primary' );
-		?>		
+		// Display the form submit buton as an alternative to the bellow input practice
+		// submit_button( 'Save Changes', 'primary' );
+		?>
+		<br>
+		<input type="submit" name="Save" value="Save Options" class="button-primary">
+		<a href="<?php admin_url(sprintf(basename($_SERVER['REQUEST_URI']))); ?>" class="button-secondary">Cancel</a>
 		</form>
 	</div>
 	<?php
@@ -201,8 +204,9 @@ function aulapress_validate_options( $input ) {
 // Aulapress About Page
 function aulapress_about_page() {
 ?>
+	<!-- This class "wrap" sets the stage for all admin styles -->
 	<div class="wrap">
-		<h2>About</h2>
+		<h1><span class="dashicons dashicons-info-outline"></span> About Aulapress</h1>
 	</div>
 <?php
 }
