@@ -43,10 +43,10 @@ function aulapress_settings_page() {
 	// $color    = $aulapress_options[ 'color' ];
 	// $fontsize = $aulapress_options[ 'fontsize' ];
 	// $border   = $aulapress_options[ 'border' ];
-
+	
 	?>
 	<div class="wrap">
-		<h2><span class="dashicons dashicons-admin-generic"></span> Settings</h2>
+		<h2>Settings</h2>
 		<?php settings_errors(); ?>
 		<form action="options.php" method="post">
 		<?php
@@ -206,7 +206,24 @@ function aulapress_about_page() {
 ?>
 	<!-- This class "wrap" sets the stage for all admin styles -->
 	<div class="wrap">
-		<h1><span class="dashicons dashicons-info-outline"></span> About Aulapress</h1>
+		<h1>About Aulapress</h1>
+		<p>Turns WordPress into an online teaching platform</p>
 	</div>
 <?php
+}
+
+// Aulapress toolbar at admin screen
+add_action( 'wp_before_admin_bar_render', 'aulapress_toolbar' );
+
+function aulapress_toolbar() {
+	global $wp_admin_bar;
+
+	if( current_user_can( 'edit_courses' ) && ! is_admin() ) {
+
+		$wp_admin_bar->add_menu([
+			'id' => 'aulapress-options',
+			'title' => 'Aulapress',
+			'href' => esc_url( admin_url( 'admin.php?page=aulapress-options' ) )
+		]);
+	}
 }

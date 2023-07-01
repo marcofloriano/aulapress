@@ -34,18 +34,22 @@ class Activation {
 		$student_role         = 'aulapress_student';
 		$student_display_name = 'Aulapress Student';
 		$student_capabilities = array( 
-			'read' => true
+			'read_courses' => true,
 		);
 		add_role( 'aulapress_student', 'Aulapress Student', $student_capabilities );
 		
-		// Create a new role for the teachers
-		$teacher_role         = 'aulapress_teacher';
-		$teacher_display_name = 'Aulapress Teacher';
-		$teacher_capabilities = array(
-			'read'         => true, 
-			'upload_files' => true
-		);
-		add_role( $teacher_role, $teacher_display_name, $teacher_capabilities );
+		// Create a new role for the teachers from editor base role
+		$editor_role = get_role('editor');
+		add_role( 'aulapress_teacher', 'Aulapress Teacher', $editor_role->capabilities );
+
+		// Add special capabilities to the teacher role
+		$teacher_role = get_role( 'aulapress_teacher' );
+		$teacher_role->add_cap( 'read_courses', true);
+		$teacher_role->add_cap( 'upload_files', true);
+		$teacher_role->add_cap( 'delete_courses', true);
+		$teacher_role->add_cap( 'edit_courses', true);
+		$teacher_role->add_cap( 'create_courses', true);
+		$teacher_role->add_cap( 'publish_courses', true);
 	}
 
 	/**

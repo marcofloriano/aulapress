@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Aulapress
  * Plugin URI: https://marcofloriano.com.br/aulapress
- * Description: Turn WordPress into an online teaching platform
+ * Description: Turns WordPress into an online teaching platform
  * Version: 1.0.0
  * Author: Marco Floriano
  * Author URI: https://marcofloriano.com.br
