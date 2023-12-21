@@ -50,6 +50,7 @@ class Activation {
 		$teacher_role->add_cap( 'edit_courses', true);
 		$teacher_role->add_cap( 'create_courses', true);
 		$teacher_role->add_cap( 'publish_courses', true);
+		$teacher_role->add_cap( 'manage_options', true);
 	}
 
 	/**

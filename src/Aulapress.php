@@ -23,13 +23,16 @@ add_action( 'admin_menu', 'aulapress_create_menu' );
 function aulapress_create_menu() {
 
 	//creates aulapress custom top-level menu
+	// Apenas admin
 	add_menu_page( 'Aulapress Options', 'Aulapress',
-		'manage_options', 'aulapress-options', 'aulapress_settings_page',
+		'install_plugins', 'aulapress-options', 'aulapress_settings_page',
 		'dashicons-welcome-learn-more', 30 );
 
 	//creates aulapress submenu items
+	// Apenas admin
 	add_submenu_page( 'aulapress-options', 'Aulapress Settings', 'Settings',
-		'manage_options', 'aulapress-options', 'aulapress_settings_page' );
+		'install_plugins', 'aulapress-options', 'aulapress_settings_page' );
+	// Qualquer instrutor
 	add_submenu_page( 'aulapress-options', 'About Aulapress', 'About',
 		'manage_options', 'aulapress-about', 'aulapress_about_page' );
 }
@@ -43,8 +46,11 @@ function aulapress_settings_page() {
 	// $color    = $aulapress_options[ 'color' ];
 	// $fontsize = $aulapress_options[ 'fontsize' ];
 	// $border   = $aulapress_options[ 'border' ];
+
+	if( current_user_can( 'install_plugins' ) ) {
 	
 	?>
+
 	<div class="wrap">
 		<h2>Settings</h2>
 		<?php settings_errors(); ?>
@@ -63,6 +69,7 @@ function aulapress_settings_page() {
 		</form>
 	</div>
 	<?php
+	}
 }
 
 // Register plugin settings
